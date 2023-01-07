@@ -40,7 +40,10 @@ export default class CompanyService {
     }
 
     getFromLocalStorage() {
-        this.companiesList = JSON.parse(localStorage.getItem('companiesList'));
+       const data = localStorage.getItem('companiesList');
+        if (data) {
+            this.companiesList = JSON.parse(data);
+        }
     }
 
     setToLocalStorage() {
