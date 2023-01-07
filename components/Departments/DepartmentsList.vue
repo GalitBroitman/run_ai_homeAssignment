@@ -69,17 +69,19 @@ export default {
       const departmentToDelete = this.company.departments.find(
         (department) => department.name === name
       );
-         // on delete , check if there are employees in the department
-      if(departmentToDelete.employees.length>1) {
+      // on delete , check if there are employees in the department
+      if(departmentToDelete.employees.length) {
           const departmentsNames = this.company.departments.map( department => department.name);
           
           //get list departments to move employees in
            this.availableDepartments = departmentsNames.filter(
               (departmentName) =>  departmentName !== name
             );
-           this.availableDepartments =  this.availableDepartments.concat(['<None>']);
-          this.showDepartments = true;
-          this.question = "Are you sure you want to delete?\n Please select a department to transfer the employees in the current department to: ";
+          if (this.availableDepartments.length) {
+            this.availableDepartments =  this.availableDepartments.concat(['<None>']);
+            this.showDepartments = true;
+            this.question = "Are you sure you want to delete?\n Please select a department to transfer the employees in the current department to: ";
+          }
       }
       this.showConfirmDialog = true;
     },
